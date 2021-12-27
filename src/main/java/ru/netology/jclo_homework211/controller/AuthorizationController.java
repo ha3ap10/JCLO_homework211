@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.netology.jclo_homework211.exceptions.InvalidCredentials;
 import ru.netology.jclo_homework211.exceptions.UnauthorizedUser;
 import ru.netology.jclo_homework211.model.Authorities;
+import ru.netology.jclo_homework211.model.User;
 import ru.netology.jclo_homework211.service.AuthorizationService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,8 +20,8 @@ public class AuthorizationController {
     }
 
     @GetMapping("/authorize")
-    public List<Authorities> getAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {
-        return service.getAuthorities(user, password);
+    public List<Authorities> getAuthorities(@Valid User user) {
+        return service.getAuthorities(user);
     }
 
     @ExceptionHandler(InvalidCredentials.class)
