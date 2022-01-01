@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./src/main/resources/html:/tmp/html
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+  app:
+    image: 'app:1.0'
+    container_name: app
